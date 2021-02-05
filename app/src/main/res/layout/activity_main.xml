@@ -14,10 +14,17 @@
         android:text="Start"
         android:layout_gravity="center_horizontal" />
 
-    <GridView
+    <Spinner
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:numColumns="3"
-        android:id="@+id/gv_apps" />
+        android:layout_height="wrap_content"
+        android:id="@+id/sp_week"
+        android:entries="@array/data" />
+
+    <Spinner
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:id="@+id/sp_app"
+        android:gravity="center" />
 
 </LinearLayout>

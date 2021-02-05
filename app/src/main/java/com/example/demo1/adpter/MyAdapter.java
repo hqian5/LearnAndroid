@@ -13,12 +13,12 @@ import com.example.demo1.entity.App;
 
 import java.util.ArrayList;
 
-public class GridAdapter extends BaseAdapter {
+public class MyAdapter extends BaseAdapter {
 
     private Context mContext;
     private ArrayList<App> mData;
 
-    public GridAdapter(Context context, ArrayList<App> data) {
+    public MyAdapter(Context context, ArrayList<App> data) {
         this.mContext = context;
         this.mData = data;
     }
@@ -42,7 +42,7 @@ public class GridAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         ViewHolder holder = null;
         if (convertView == null) {
-            convertView = LayoutInflater.from(mContext).inflate(R.layout.item_gridview, parent, false);
+            convertView = LayoutInflater.from(mContext).inflate(R.layout.item_spinner, parent, false);
             holder = new ViewHolder();
             holder.img = convertView.findViewById(R.id.iv_icon);
             holder.txt = convertView.findViewById(R.id.tv_name);
