@@ -14,17 +14,20 @@
         android:text="Start"
         android:layout_gravity="center_horizontal" />
 
-    <Spinner
+    <AutoCompleteTextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/sp_week"
-        android:entries="@array/data" />
+        android:id="@+id/act_content"
+        android:hint="输入搜索内容"
+        android:completionHint="选择日期"
+        android:completionThreshold="1" />
 
-    <Spinner
+    <MultiAutoCompleteTextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:id="@+id/sp_app"
-        android:gravity="center" />
+        android:id="@+id/mact_content"
+        android:hint="输入搜索内容"
+        android:completionHint="选择日期"
+        android:completionThreshold="1" />
 
 </LinearLayout>
