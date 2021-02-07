@@ -14,20 +14,10 @@
         android:text="Start"
         android:layout_gravity="center_horizontal" />
 
-    <AutoCompleteTextView
+    <ExpandableListView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/act_content"
-        android:hint="输入搜索内容"
-        android:completionHint="选择日期"
-        android:completionThreshold="1" />
-
-    <MultiAutoCompleteTextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/mact_content"
-        android:hint="输入搜索内容"
-        android:completionHint="选择日期"
-        android:completionThreshold="1" />
+        android:layout_marginTop="20dp"
+        android:id="@+id/elv_content" />
 
 </LinearLayout>
