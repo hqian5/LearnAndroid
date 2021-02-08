@@ -3,11 +3,13 @@ package com.example.demo1;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.ExpandableListView;
 import android.widget.MultiAutoCompleteTextView;
+import android.widget.Toast;
 
 import com.example.demo1.adpter.ExpandableAdapter;
 import com.example.demo1.entity.App;
@@ -23,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
     private ArrayList<Group> gData;
     private ArrayList<ArrayList<App>> cData;
     private ArrayList<App> items;
+    private boolean isOpen = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,5 +63,26 @@ public class MainActivity extends AppCompatActivity {
 
         adapter = new ExpandableAdapter(getApplicationContext(), gData, cData);
         listView.setAdapter(adapter);
+        listView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
+            @Override
+            public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
+                App app = cData.get(groupPosition).get(childPosition);
+                Toast.makeText(getApplicationContext(), "你选择了" + app.getName(), Toast.LENGTH_SHORT).show();
+                return true;
+            }
+        });
+        listView.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
+            @Override
+            public boolean onGroupClick(ExpandableListView parent, View v, int groupPosition, long id) {
+                if (isOpen) {
+                    Toast.makeText(getApplicationContext(), "你关闭了" + gData.get(groupPosition).getGroupName(), Toast.LENGTH_SHORT).show();
+                    isOpen = false;
+                } else {
+                    Toast.makeText(getApplicationContext(), "你打开了" + gData.get(groupPosition).getGroupName(), Toast.LENGTH_SHORT).show();
+                    isOpen = true;
+                }
+                return false;
+            }
+        });
     }
 }
