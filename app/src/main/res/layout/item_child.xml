@@ -3,7 +3,9 @@
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="10dp">
+    android:padding="10dp"
+    android:id="@+id/ll_child"
+    android:background="@drawable/bg_round">
 
     <ImageView
         android:layout_width="wrap_content"
@@ -18,6 +20,7 @@
         android:id="@+id/tv_child"
         android:layout_marginStart="20dp"
         android:layout_gravity="center_vertical"
-        android:textSize="30sp" />
+        android:textSize="30sp"
+        android:textColor="@color/white" />
 
 </LinearLayout>
