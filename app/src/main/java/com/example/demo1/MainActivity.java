@@ -3,13 +3,18 @@ package com.example.demo1;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.view.GestureDetector;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.animation.Animation;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.ExpandableListView;
+import android.widget.ImageView;
 import android.widget.MultiAutoCompleteTextView;
 import android.widget.Toast;
+import android.widget.ViewFlipper;
 
 import com.example.demo1.adpter.ExpandableAdapter;
 import com.example.demo1.entity.App;
@@ -20,12 +25,11 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
 
     private Button btnStart;
-    private ExpandableListView listView;
-    private ExpandableAdapter adapter;
-    private ArrayList<Group> gData;
-    private ArrayList<ArrayList<App>> cData;
-    private ArrayList<App> items;
-    private boolean isOpen = false;
+    private int[] resId = {R.drawable.ic_dva1, R.drawable.ic_dva2, R.drawable.ic_dva3, R.drawable.ic_dva4, R.drawable.ic_dva5, R.drawable.ic_dva6};
+    private ViewFlipper viewFlipper;
+    private GestureDetector detector;
+    private MyGestureListener listener;
+    private final static int MIN_MOVE = 200;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,54 +39,39 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initView() {
-        listView = findViewById(R.id.elv_content);
-        gData = new ArrayList<>();
-        cData = new ArrayList<>();
-        gData.add(new Group("娱乐"));
-        gData.add(new Group("社交"));
-        gData.add(new Group("生活"));
+        viewFlipper = findViewById(R.id.vf_dva);
+        for (int i = 0; i < resId.length; i++) {
+            viewFlipper.addView(setImageView(resId[i]));
+        }
+        listener = new MyGestureListener();
+        detector = new GestureDetector(this, listener);
+    }
 
-        items = new ArrayList<>();
-        items.add(new App("腾讯视频", R.drawable.ic_tx_video));
-        items.add(new App("QQ音乐", R.drawable.ic_qq_music));
-        items.add(new App("优酷", R.drawable.ic_youku));
-        cData.add(items);
+    //重写onTouchEvent触发MyGestureListener里的方法
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        return detector.onTouchEvent(event);
+    }
 
-        items = new ArrayList<>();
-        items.add(new App("微信", R.drawable.ic_wechat));
-        items.add(new App("QQ", R.drawable.ic_qq));
-        items.add(new App("微博", R.drawable.ic_weibo));
-        cData.add(items);
-
-        items = new ArrayList<>();
-        items.add(new App("美团", R.drawable.ic_meituan));
-        items.add(new App("支付宝", R.drawable.ic_alipay));
-        items.add(new App("大众点评", R.drawable.ic_dianping));
-        items.add(new App("百度地图", R.drawable.ic_baidu_map));
-        cData.add(items);
-
-        adapter = new ExpandableAdapter(getApplicationContext(), gData, cData);
-        listView.setAdapter(adapter);
-        listView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
-            @Override
-            public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
-                App app = cData.get(groupPosition).get(childPosition);
-                Toast.makeText(getApplicationContext(), "你选择了" + app.getName(), Toast.LENGTH_SHORT).show();
-                return true;
+    private class MyGestureListener extends GestureDetector.SimpleOnGestureListener {
+        @Override
+        public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
+            if (e1.getX() - e2.getX() > MIN_MOVE) {
+                viewFlipper.setInAnimation(getApplicationContext(), R.anim.right_in);
+                viewFlipper.setOutAnimation(getApplicationContext(), R.anim.right_out);
+                viewFlipper.showNext();
+            } else if (e2.getX() - e1.getX() > MIN_MOVE) {
+                viewFlipper.setInAnimation(getApplicationContext(), R.anim.left_in);
+                viewFlipper.setOutAnimation(getApplicationContext(), R.anim.left_out);
+                viewFlipper.showPrevious();
             }
-        });
-        listView.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
-            @Override
-            public boolean onGroupClick(ExpandableListView parent, View v, int groupPosition, long id) {
-                if (isOpen) {
-                    Toast.makeText(getApplicationContext(), "你关闭了" + gData.get(groupPosition).getGroupName(), Toast.LENGTH_SHORT).show();
-                    isOpen = false;
-                } else {
-                    Toast.makeText(getApplicationContext(), "你打开了" + gData.get(groupPosition).getGroupName(), Toast.LENGTH_SHORT).show();
-                    isOpen = true;
-                }
-                return false;
-            }
-        });
+            return true;
+        }
+    }
+
+    private ImageView setImageView(int resId) {
+        ImageView img = new ImageView(this);
+        img.setImageResource(resId);
+        return img;
     }
 }

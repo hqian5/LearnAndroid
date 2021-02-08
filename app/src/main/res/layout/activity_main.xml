@@ -7,17 +7,17 @@
     tools:context=".MainActivity"
     android:orientation="vertical">
 
-    <Button
-        android:id="@+id/btn_start"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Start"
-        android:layout_gravity="center_horizontal" />
+    <!--    <Button-->
+    <!--        android:id="@+id/btn_start"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:text="Start"-->
+    <!--        android:layout_gravity="center_horizontal" />-->
 
-    <ExpandableListView
+    <ViewFlipper
+        android:id="@+id/vf_dva"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:id="@+id/elv_content" />
+        android:layout_height="match_parent" />
+
 
 </LinearLayout>
