@@ -79,9 +79,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         switch (v.getId()) {
             case R.id.btn_start:
                 Intent intent = new Intent(MainActivity.this, OtherActivity.class);
-                TaskStackBuilder stackBuilder = TaskStackBuilder.create(MainActivity.this);
-                stackBuilder.addNextIntentWithParentStack(intent);
-                PendingIntent pendingIntent = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
+                PendingIntent pendingIntent = PendingIntent.getActivity(MainActivity.this, 0, intent, 0);
                 String channelId = createNotificationChannel("demo1_channel", "demo1", NotificationManager.IMPORTANCE_MAX);
                 Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.ic_dva1);
                 NotificationCompat.Builder builder = new NotificationCompat.Builder(this, channelId);
@@ -104,7 +102,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     return;
                 }
                 notificationManager.cancel(100);
-//                startActivity(new Intent(this, OtherActivity.class));
                 break;
         }
     }
