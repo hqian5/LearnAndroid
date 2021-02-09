@@ -1,7 +1,20 @@
 package com.example.demo1;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 
+import android.annotation.SuppressLint;
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.app.TaskStackBuilder;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.GestureDetector;
 import android.view.Gravity;
@@ -24,9 +37,12 @@ import com.example.demo1.entity.Group;
 
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     private Button btnStart;
+    private Button btnEnd;
+    private NotificationManagerCompat notificationManager;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,13 +53,11 @@ public class MainActivity extends AppCompatActivity {
 
     private void initView() {
         btnStart = findViewById(R.id.btn_start);
-        btnStart.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                setToast("你好你好~");
-            }
-        });
+        btnEnd = findViewById(R.id.btn_end);
+        btnStart.setOnClickListener(this);
+        btnEnd.setOnClickListener(this);
     }
+
 
     private void setToast(String msg) {
         View toastView = getLayoutInflater().inflate(R.layout.item_child, findViewById(R.id.ll_child));
@@ -56,5 +70,53 @@ public class MainActivity extends AppCompatActivity {
         toast.setView(toastView);
         toast.setDuration(Toast.LENGTH_SHORT);
         toast.show();
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    @SuppressLint("NonConstantResourceId")
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.btn_start:
+                Intent intent = new Intent(MainActivity.this, OtherActivity.class);
+                TaskStackBuilder stackBuilder = TaskStackBuilder.create(MainActivity.this);
+                stackBuilder.addNextIntentWithParentStack(intent);
+                PendingIntent pendingIntent = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
+                String channelId = createNotificationChannel("demo1_channel", "demo1", NotificationManager.IMPORTANCE_MAX);
+                Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.ic_dva1);
+                NotificationCompat.Builder builder = new NotificationCompat.Builder(this, channelId);
+                builder.setContentTitle("D.va")
+                        .setContentText("D.va叫你回家吃饭啦~")
+                        .setSubText("D.va在家等你哦")
+                        .setTicker("D.va给你发送了一条信息")
+                        .setSmallIcon(R.drawable.ic_dianping)
+                        .setLargeIcon(bitmap)
+                        .setWhen(System.currentTimeMillis())
+                        .setDefaults(Notification.DEFAULT_LIGHTS | Notification.DEFAULT_VIBRATE | Notification.DEFAULT_SOUND)
+                        .setPriority(NotificationCompat.PRIORITY_HIGH)
+                        .setAutoCancel(true)
+                        .setContentIntent(pendingIntent);
+                notificationManager = NotificationManagerCompat.from(this);
+                notificationManager.notify(100, builder.build());
+                break;
+            case R.id.btn_end:
+                if (notificationManager == null) {
+                    return;
+                }
+                notificationManager.cancel(100);
+//                startActivity(new Intent(this, OtherActivity.class));
+                break;
+        }
+    }
+
+    private String createNotificationChannel(String channelId, String channelName, int level) {
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+            NotificationManager manager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+            NotificationChannel channel = new NotificationChannel(channelId, channelName, level);
+            manager.createNotificationChannel(channel);
+            return channelId;
+        } else {
+            return null;
+        }
     }
 }
