@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:padding="10dp"
     android:id="@+id/ll_child"
-    android:background="@drawable/bg_round">
+    android:background="@drawable/bg_round_pressed">
 
     <ImageView
         android:layout_width="wrap_content"

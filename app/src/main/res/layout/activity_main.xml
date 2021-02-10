@@ -11,15 +11,35 @@
         android:id="@+id/btn_start"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="发送通知"
+        android:text="普通dialog"
         android:layout_gravity="center_horizontal" />
 
     <Button
         android:id="@+id/btn_end"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="关闭通知"
+        android:text="带有列表的dialog"
         android:layout_gravity="center_horizontal" />
 
+    <Button
+        android:id="@+id/btn_dialog3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="带有单选列表的dialog"
+        android:layout_gravity="center_horizontal" />
+
+    <Button
+        android:id="@+id/btn_dialog4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="带有多选列表的dialog"
+        android:layout_gravity="center_horizontal" />
+
+    <Button
+        android:id="@+id/btn_dialog_diy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="自定义的dialog"
+        android:layout_gravity="center_horizontal" />
 
 </LinearLayout>
