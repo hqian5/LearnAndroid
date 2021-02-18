@@ -5,7 +5,9 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
+import android.app.TimePickerDialog;
 import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
@@ -14,16 +16,21 @@ import android.os.Message;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import java.text.NumberFormat;
+import java.util.Calendar;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     private Context mContext;
-    private ProgressDialog pd1;
+    private ProgressDialog progressDialog;
+    private DatePickerDialog datePickerDialog;
+    private TimePickerDialog timePickerDialog;
     private int progressStart = 0;
     private final static int MAX_COUNT = 101;
 
@@ -72,21 +79,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 ProgressDialog.show(mContext, "请稍等", "加载中...", false, true);
                 break;
             case R.id.btn_end:
-                pd1 = new ProgressDialog(mContext);
-                pd1.setTitle("请稍后");
-                pd1.setMessage("加载中...");
-                pd1.setCancelable(true);
-                pd1.setIndeterminate(false);
+                progressDialog = new ProgressDialog(mContext);
+                progressDialog.setTitle("请稍后");
+                progressDialog.setMessage("加载中...");
+                progressDialog.setCancelable(true);
+                progressDialog.setIndeterminate(false);
                 //这里是设置进度条的风格,HORIZONTAL是水平进度条,SPINNER是圆形进度条
-                pd1.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-                pd1.show();
+                progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+                progressDialog.show();
                 break;
             case R.id.btn_dialog3:
-                pd1 = new ProgressDialog(mContext);
-                pd1.setTitle("下载中");
-                pd1.setCancelable(true);
-                pd1.setIndeterminate(false);
-                pd1.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+                progressDialog = new ProgressDialog(mContext);
+                progressDialog.setTitle("下载中");
+                progressDialog.setCancelable(true);
+                progressDialog.setIndeterminate(false);
+                progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
                 new Thread() {
                     public void run() {
                         for (int i = 0; i <= MAX_COUNT; i++) {
@@ -104,8 +111,24 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 progressStart = 0;
                 break;
             case R.id.btn_dialog4:
+                Calendar calendar = Calendar.getInstance();
+                datePickerDialog = new DatePickerDialog(mContext, new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                        setToast("已选择" + year + "年" + (month + 1) + "月" + dayOfMonth + "日");
+                    }
+                }, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
+                datePickerDialog.show();
                 break;
             case R.id.btn_dialog_diy:
+                Calendar calendar1 = Calendar.getInstance();
+                timePickerDialog = new TimePickerDialog(mContext, new TimePickerDialog.OnTimeSetListener() {
+                    @Override
+                    public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                        setToast("已选择" + hourOfDay + "点" + minute + "分");
+                    }
+                }, calendar1.get(Calendar.HOUR_OF_DAY), calendar1.get(Calendar.MINUTE), false);
+                timePickerDialog.show();
                 break;
         }
     }
@@ -114,14 +137,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         @Override
         public boolean handleMessage(@NonNull Message msg) {
             if (msg.what == 111) {
-                pd1.setProgress(progressStart);
+                progressDialog.setProgress(progressStart);
                 NumberFormat format = NumberFormat.getPercentInstance();
                 format.setMaximumIntegerDigits(3);
-                pd1.setMessage("已下载" + format.format(progressStart / 100.0));
-                pd1.show();
+                progressDialog.setMessage("已下载" + format.format(progressStart / 100.0));
+                progressDialog.show();
             }
             if (progressStart == MAX_COUNT) {
-                pd1.dismiss();
+                progressDialog.dismiss();
                 setToast("下载完成");
             }
             return true;

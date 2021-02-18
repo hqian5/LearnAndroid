@@ -35,14 +35,16 @@
         android:id="@+id/btn_dialog4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="待定"
-        android:layout_gravity="center_horizontal" />
+        android:text="日期选择Dialog"
+        android:layout_gravity="center_horizontal"
+        android:textAllCaps="false" />
 
     <Button
         android:id="@+id/btn_dialog_diy"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="待定"
-        android:layout_gravity="center_horizontal" />
+        android:text="时间选择Dialog"
+        android:layout_gravity="center_horizontal"
+        android:textAllCaps="false" />
 
 </LinearLayout>
