@@ -9,9 +9,9 @@
 
     <Button
         android:id="@+id/btn_start"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="普通ProgressDialog"
+        android:text="弹出popupWindow"
         android:layout_gravity="center_horizontal"
         android:textAllCaps="false" />
 
@@ -21,7 +21,8 @@
         android:layout_height="wrap_content"
         android:text="普通ProgressDialog，但不会更新"
         android:layout_gravity="center_horizontal"
-        android:textAllCaps="false" />
+        android:textAllCaps="false"
+        android:visibility="gone" />
 
     <Button
         android:id="@+id/btn_dialog3"
@@ -29,7 +30,8 @@
         android:layout_height="wrap_content"
         android:text="可以更新的ProgressDialog"
         android:layout_gravity="center_horizontal"
-        android:textAllCaps="false" />
+        android:textAllCaps="false"
+        android:visibility="gone" />
 
     <Button
         android:id="@+id/btn_dialog4"
@@ -37,7 +39,8 @@
         android:layout_height="wrap_content"
         android:text="日期选择Dialog"
         android:layout_gravity="center_horizontal"
-        android:textAllCaps="false" />
+        android:textAllCaps="false"
+        android:visibility="gone" />
 
     <Button
         android:id="@+id/btn_dialog_diy"
@@ -45,6 +48,7 @@
         android:layout_height="wrap_content"
         android:text="时间选择Dialog"
         android:layout_gravity="center_horizontal"
-        android:textAllCaps="false" />
+        android:textAllCaps="false"
+        android:visibility="gone" />
 
 </LinearLayout>
