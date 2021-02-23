@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- checkableBehavior的可选值由三个：single设置为单选，all为多选，none为普通选项 -->
+    <group
+        android:id="@+id/context_menu"
+        android:checkableBehavior="none">
+        <item
+            android:id="@+id/m1"
+            android:title="dva1"
+            android:icon="@drawable/ic_dva1" />
+        <item
+            android:id="@+id/m2"
+            android:title="dva2"
+            android:icon="@drawable/ic_dva2" />
+        <item
+            android:id="@+id/m3"
+            android:title="dva3"
+            android:icon="@drawable/ic_dva3" />
+    </group>
+</menu>

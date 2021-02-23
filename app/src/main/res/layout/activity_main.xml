@@ -11,18 +11,17 @@
         android:id="@+id/btn_start"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="弹出popupWindow"
+        android:text="contextMenu"
         android:layout_gravity="center_horizontal"
         android:textAllCaps="false" />
 
     <Button
         android:id="@+id/btn_end"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="普通ProgressDialog，但不会更新"
+        android:text="popupMenu"
         android:layout_gravity="center_horizontal"
-        android:textAllCaps="false"
-        android:visibility="gone" />
+        android:textAllCaps="false" />
 
     <Button
         android:id="@+id/btn_dialog3"
@@ -49,6 +48,13 @@
         android:text="时间选择Dialog"
         android:layout_gravity="center_horizontal"
         android:textAllCaps="false"
+        android:visibility="gone" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/iv_img"
+        android:layout_gravity="center_horizontal"
         android:visibility="gone" />
 
 </LinearLayout>

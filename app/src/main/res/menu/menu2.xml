@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- checkableBehavior的可选值由三个：single设置为单选，all为多选，none为普通选项 -->
+    <group
+        android:id="@+id/context_menu"
+        android:checkableBehavior="none">
+        <item
+            android:id="@+id/m1"
+            android:title="体育">
+            <menu>
+                <group android:id="@+id/sub1">
+                    <item
+                        android:id="@+id/sub1_m1"
+                        android:title="篮球" />
+                    <item
+                        android:id="@+id/sub1_m2"
+                        android:title="羽毛球" />
+                    <item
+                        android:id="@+id/sub1_m3"
+                        android:title="足球" />
+                </group>
+            </menu>
+        </item>
+        <item
+            android:id="@+id/m2"
+            android:title="休闲">
+            <menu>
+                <group android:id="@+id/sub2">
+                    <item
+                        android:id="@+id/sub2_m1"
+                        android:title="看电影" />
+                    <item
+                        android:id="@+id/sub2_m2"
+                        android:title="吃小吃" />
+                    <item
+                        android:id="@+id/sub2_m3"
+                        android:title="喝咖啡" />
+                </group>
+            </menu>
+        </item>
+        <item
+            android:id="@+id/m3"
+            android:title="工作">
+            <menu>
+                <group android:id="@+id/sub3">
+                    <item
+                        android:id="@+id/sub3_m1"
+                        android:title="开发" />
+                    <item
+                        android:id="@+id/sub3_m2"
+                        android:title="测试" />
+                    <item
+                        android:id="@+id/sub3_m3"
+                        android:title="需求" />
+                </group>
+            </menu>
+        </item>
+    </group>
+</menu>
