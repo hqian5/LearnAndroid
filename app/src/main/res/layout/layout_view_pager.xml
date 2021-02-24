@@ -10,7 +10,8 @@
         android:id="@+id/tv_title"
         android:textSize="20sp"
         android:layout_gravity="center_horizontal"
-        android:gravity="center" />
+        android:gravity="center"
+        android:visibility="gone" />
 
     <ImageView
         android:layout_width="match_parent"

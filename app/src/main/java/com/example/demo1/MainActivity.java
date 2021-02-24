@@ -1,6 +1,8 @@
 package com.example.demo1;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.viewpager.widget.PagerTabStrip;
+import androidx.viewpager.widget.PagerTitleStrip;
 import androidx.viewpager.widget.ViewPager;
 
 import android.annotation.SuppressLint;
@@ -44,6 +46,10 @@ public class MainActivity extends AppCompatActivity {
         TextView textView = findViewById(R.id.tv_main_title);
         textView.setText("简单ViewPager演示");
         viewPager = findViewById(R.id.vp);
+//        PagerTitleStrip titleStrip = findViewById(R.id.pts_title);
+//        titleStrip.setTextSize(0, 50f);
+        PagerTabStrip tabStrip = findViewById(R.id.pts_tab);
+        tabStrip.setTextSize(0, 50f);
         int[] res = {R.drawable.ic_dva1, R.drawable.ic_dva2, R.drawable.ic_dva3, R.drawable.ic_dva4, R.drawable.ic_dva5, R.drawable.ic_dva6};
         apps = new ArrayList<>();
         for (int i = 0; i < res.length; i++) {

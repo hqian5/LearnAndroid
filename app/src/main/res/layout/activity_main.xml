@@ -69,6 +69,18 @@
     <androidx.viewpager.widget.ViewPager
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/vp" />
+        android:id="@+id/vp">
+
+        <!--        <androidx.viewpager.widget.PagerTitleStrip-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:id="@+id/pts_title" />-->
+
+        <androidx.viewpager.widget.PagerTabStrip
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/pts_tab" />
+
+    </androidx.viewpager.widget.ViewPager>
 
 </LinearLayout>
