@@ -13,7 +13,8 @@
         android:layout_height="wrap_content"
         android:text="contextMenu"
         android:layout_gravity="center_horizontal"
-        android:textAllCaps="false" />
+        android:textAllCaps="false"
+        android:visibility="gone" />
 
     <Button
         android:id="@+id/btn_end"
@@ -21,7 +22,8 @@
         android:layout_height="wrap_content"
         android:text="popupMenu"
         android:layout_gravity="center_horizontal"
-        android:textAllCaps="false" />
+        android:textAllCaps="false"
+        android:visibility="gone" />
 
     <Button
         android:id="@+id/btn_dialog3"
@@ -56,5 +58,17 @@
         android:id="@+id/iv_img"
         android:layout_gravity="center_horizontal"
         android:visibility="gone" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="30sp"
+        android:id="@+id/tv_main_title"
+        android:gravity="center" />
+
+    <androidx.viewpager.widget.ViewPager
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/vp" />
 
 </LinearLayout>

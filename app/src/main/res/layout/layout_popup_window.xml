@@ -10,25 +10,24 @@
         android:id="@+id/btn_delete"
         android:textSize="15sp"
         android:layout_gravity="center_horizontal"
-        android:background="@drawable/selector_btn"
-        android:text="删除对话框" />
+        android:text="删除此页面" />
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="15sp"
-        android:id="@+id/btn_unread"
-        android:layout_gravity="center_horizontal"
-        android:background="@drawable/selector_btn"
-        android:text="标记为未读" />
+    <!--    <Button-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:textSize="15sp"-->
+    <!--        android:id="@+id/btn_unread"-->
+    <!--        android:layout_gravity="center_horizontal"-->
+    <!--        android:background="@drawable/selector_btn"-->
+    <!--        android:text="标记为未读" />-->
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="15sp"
-        android:id="@+id/btn_top"
-        android:layout_gravity="center_horizontal"
-        android:background="@drawable/selector_btn"
-        android:text="设为置顶" />
+    <!--    <Button-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:textSize="15sp"-->
+    <!--        android:id="@+id/btn_top"-->
+    <!--        android:layout_gravity="center_horizontal"-->
+    <!--        android:background="@drawable/selector_btn"-->
+    <!--        android:text="设为置顶" />-->
 
 </LinearLayout>
