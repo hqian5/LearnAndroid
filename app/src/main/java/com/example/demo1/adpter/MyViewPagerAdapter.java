@@ -20,7 +20,7 @@ public class MyViewPagerAdapter extends PagerAdapter {
 
     private ArrayList<App> mList;
     private ImageView imgContent;
-    private ArrayList<ImageView> imageViews = new ArrayList<>();
+    private ArrayList<ImageView> imageViews;
 
     public ImageView getImgContent() {
         return imgContent;
@@ -32,6 +32,7 @@ public class MyViewPagerAdapter extends PagerAdapter {
 
     public MyViewPagerAdapter(ArrayList<App> mList) {
         this.mList = mList;
+        imageViews = new ArrayList<>();
     }
 
     @Override
