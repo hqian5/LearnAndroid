@@ -1,14 +1,17 @@
 package com.example.demo1;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.FragmentManager;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -17,42 +20,65 @@ import android.widget.Toast;
 import com.example.demo1.adpter.GeneralAdapter;
 import com.example.demo1.entity.App;
 import com.example.demo1.fragment.ContentFragment;
+import com.example.demo1.fragment.LeftMenuFragment;
+import com.example.demo1.fragment.RightMenuFragment;
 
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
+public class MainActivity extends AppCompatActivity {
 
     private Context mContext;
     private DrawerLayout drawerLayout;
-    private ListView listView;
-    private ArrayList<App> list;
-    private GeneralAdapter<App> adapter = null;
+    private LeftMenuFragment leftMenuFragment;
+    private RightMenuFragment rightMenuFragment;
+    private FragmentManager manager;
+    private Button btnOpen;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.layout_one_drawer);
+        setContentView(R.layout.layout_two_drawers);
         mContext = MainActivity.this;
         initView();
     }
 
+    @SuppressLint("WrongConstant")
     private void initView() {
+        manager = getSupportFragmentManager();
         drawerLayout = findViewById(R.id.dr_layout);
-        listView = findViewById(R.id.lv_drawer_item);
-        int[] res = {R.drawable.ic_alipay, R.drawable.ic_baidu_map, R.drawable.ic_dianping, R.drawable.ic_meituan, R.drawable.ic_weibo};
-        list = new ArrayList<>();
-        for (int i = 0; i < res.length; i++) {
-            list.add(new App("name" + i, res[i]));
-        }
-        adapter = new GeneralAdapter<App>(list, R.layout.item_spinner) {
+        leftMenuFragment = (LeftMenuFragment) manager.findFragmentById(R.id.fg_left_menu);
+        rightMenuFragment = (RightMenuFragment) manager.findFragmentById(R.id.fg_right_menu);
+        leftMenuFragment.setDrawerLayout(drawerLayout);
+        rightMenuFragment.setDrawerLayout(drawerLayout);
+        drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED, Gravity.END);
+        drawerLayout.addDrawerListener(new DrawerLayout.DrawerListener() {
             @Override
-            public void bindView(ViewHolder holder, App obj) {
-                holder.setImageResource(R.id.iv_icon, obj.getImgId());
-                holder.setText(R.id.tv_name, obj.getName());
+            public void onDrawerSlide(@NonNull View drawerView, float slideOffset) {
+
             }
-        };
-        listView.setAdapter(adapter);
-        listView.setOnItemClickListener(this);
+
+            @Override
+            public void onDrawerOpened(@NonNull View drawerView) {
+
+            }
+
+            @Override
+            public void onDrawerClosed(@NonNull View drawerView) {
+                drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED, Gravity.END);
+            }
+
+            @Override
+            public void onDrawerStateChanged(int newState) {
+
+            }
+        });
+        btnOpen = findViewById(R.id.btn_open);
+        btnOpen.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                drawerLayout.openDrawer(Gravity.END);
+            }
+        });
     }
 
     private void setToast(String msg) {
@@ -66,16 +92,5 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         toast.setView(toastView);
         toast.setDuration(Toast.LENGTH_SHORT);
         toast.show();
-    }
-
-    @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        ContentFragment contentFragment = new ContentFragment();
-        Bundle args = new Bundle();
-        args.putString("text", list.get(position).getName());
-        contentFragment.setArguments(args);
-        FragmentManager fm = getSupportFragmentManager();
-        fm.beginTransaction().replace(R.id.fl_drawer, contentFragment).commit();
-        drawerLayout.closeDrawer(listView);
     }
 }
