@@ -22,6 +22,11 @@ public abstract class GeneralAdapter<T> extends BaseAdapter {
 
     }
 
+    public GeneralAdapter(ArrayList<T> list, int layout) {
+        mData = list;
+        mLayoutRes = layout;
+    }
+
     @Override
     public int getCount() {
         return mData.size();

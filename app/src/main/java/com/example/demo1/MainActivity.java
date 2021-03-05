@@ -1,84 +1,58 @@
 package com.example.demo1;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.viewpager.widget.PagerTabStrip;
-import androidx.viewpager.widget.PagerTitleStrip;
-import androidx.viewpager.widget.ViewPager;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.FragmentManager;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.Gravity;
-import android.view.LayoutInflater;
-import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
+import android.widget.AdapterView;
 import android.widget.ImageView;
-import android.widget.PopupMenu;
-import android.widget.PopupWindow;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.demo1.adpter.MyViewPagerAdapter;
+import com.example.demo1.adpter.GeneralAdapter;
 import com.example.demo1.entity.App;
+import com.example.demo1.fragment.ContentFragment;
 
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
 
     private Context mContext;
-    private ViewPager viewPager;
-    private ArrayList<App> apps;
-    private MyViewPagerAdapter adapter;
+    private DrawerLayout drawerLayout;
+    private ListView listView;
+    private ArrayList<App> list;
+    private GeneralAdapter<App> adapter = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.layout_one_drawer);
         mContext = MainActivity.this;
         initView();
     }
 
-    @SuppressLint("ClickableViewAccessibility")
     private void initView() {
-        TextView textView = findViewById(R.id.tv_main_title);
-        textView.setText("简单ViewPager演示");
-        viewPager = findViewById(R.id.vp);
-//        PagerTitleStrip titleStrip = findViewById(R.id.pts_title);
-//        titleStrip.setTextSize(0, 50f);
-        PagerTabStrip tabStrip = findViewById(R.id.pts_tab);
-        tabStrip.setTextSize(0, 50f);
-        int[] res = {R.drawable.ic_dva1, R.drawable.ic_dva2, R.drawable.ic_dva3, R.drawable.ic_dva4, R.drawable.ic_dva5, R.drawable.ic_dva6};
-        apps = new ArrayList<>();
+        drawerLayout = findViewById(R.id.dr_layout);
+        listView = findViewById(R.id.lv_drawer_item);
+        int[] res = {R.drawable.ic_alipay, R.drawable.ic_baidu_map, R.drawable.ic_dianping, R.drawable.ic_meituan, R.drawable.ic_weibo};
+        list = new ArrayList<>();
         for (int i = 0; i < res.length; i++) {
-            apps.add(new App("D.va" + i, res[i]));
+            list.add(new App("name" + i, res[i]));
         }
-        adapter = new MyViewPagerAdapter(apps);
-        adapter.setOnTouchListener(new MyViewPagerAdapter.OnTouchListener() {
+        adapter = new GeneralAdapter<App>(list, R.layout.item_spinner) {
             @Override
-            public void onClick(View view, int pos, MotionEvent event) {
-                if (event.getAction() == MotionEvent.ACTION_UP) {
-                    View popupView = LayoutInflater.from(mContext).inflate(R.layout.layout_popup_window, null, false);
-                    Button btnDelete = popupView.findViewById(R.id.btn_delete);
-                    PopupWindow window = new PopupWindow(popupView, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT, true);
-                    window.setTouchable(true);
-                    window.showAsDropDown(view, (int) event.getX(), (int) event.getY());
-                    btnDelete.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            setToast("已删除" + apps.get(pos).getName());
-                            apps.remove(pos);
-                            window.dismiss();
-                            adapter.notifyDataSetChanged();
-                            viewPager.setAdapter(adapter);
-                        }
-                    });
-                }
+            public void bindView(ViewHolder holder, App obj) {
+                holder.setImageResource(R.id.iv_icon, obj.getImgId());
+                holder.setText(R.id.tv_name, obj.getName());
             }
-        });
-        viewPager.setAdapter(adapter);
+        };
+        listView.setAdapter(adapter);
+        listView.setOnItemClickListener(this);
     }
 
     private void setToast(String msg) {
@@ -94,4 +68,14 @@ public class MainActivity extends AppCompatActivity {
         toast.show();
     }
 
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        ContentFragment contentFragment = new ContentFragment();
+        Bundle args = new Bundle();
+        args.putString("text", list.get(position).getName());
+        contentFragment.setArguments(args);
+        FragmentManager fm = getSupportFragmentManager();
+        fm.beginTransaction().replace(R.id.fl_drawer, contentFragment).commit();
+        drawerLayout.closeDrawer(listView);
+    }
 }
