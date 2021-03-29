@@ -10,6 +10,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.example.modulemvp.base.view.BaseView;
+
 public abstract class BaseFragment extends Fragment implements BaseView {
     public abstract int getContentViewId();
 

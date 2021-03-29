@@ -1,8 +1,7 @@
 package com.example.modulemvp.present;
 
-import com.example.modulemvp.base.BasePresenter;
-import com.example.modulemvp.base.CallBack;
-import com.example.modulemvp.callback.MvpCallback;
+import com.example.modulemvp.base.presenter.BasePresenter;
+import com.example.modulemvp.base.callback.CallBack;
 import com.example.modulemvp.model.MvpModel;
 import com.example.modulemvp.view.MvpView;
 

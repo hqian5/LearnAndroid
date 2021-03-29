@@ -8,6 +8,8 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.modulemvp.base.view.BaseView;
+
 public abstract class BaseActivity extends AppCompatActivity implements BaseView {
     private ProgressDialog progressDialog;
 

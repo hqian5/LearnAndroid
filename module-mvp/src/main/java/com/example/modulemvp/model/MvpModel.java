@@ -2,8 +2,7 @@ package com.example.modulemvp.model;
 
 import android.os.Handler;
 
-import com.example.modulemvp.base.CallBack;
-import com.example.modulemvp.callback.MvpCallback;
+import com.example.modulemvp.base.callback.CallBack;
 
 /**
  * Model 类中定了具体的网络请求操作。

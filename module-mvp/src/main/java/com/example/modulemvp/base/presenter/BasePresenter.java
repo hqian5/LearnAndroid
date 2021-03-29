@@ -1,4 +1,6 @@
-package com.example.modulemvp.base;
+package com.example.modulemvp.base.presenter;
+
+import com.example.modulemvp.base.view.BaseView;
 
 /**
  * 基类presenter

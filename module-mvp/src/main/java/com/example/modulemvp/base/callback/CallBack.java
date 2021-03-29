@@ -1,4 +1,4 @@
-package com.example.modulemvp.base;
+package com.example.modulemvp.base.callback;
 
 /**
  * 基类callback

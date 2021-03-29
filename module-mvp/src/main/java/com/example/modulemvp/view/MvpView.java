@@ -1,6 +1,6 @@
 package com.example.modulemvp.view;
 
-import com.example.modulemvp.base.BaseView;
+import com.example.modulemvp.base.view.BaseView;
 
 /**
  * View接口是Activity与Presenter层的中间层，它的作用是根据具体业务的需要，为Presenter提供调用Activity中具体UI逻辑操作的方法。
