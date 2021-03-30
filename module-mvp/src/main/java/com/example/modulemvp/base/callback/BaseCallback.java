@@ -5,7 +5,7 @@ package com.example.modulemvp.base.callback;
  *
  * @param <T> 接收数据的类型
  */
-public interface CallBack<T> {
+public interface BaseCallback<T> {
     /**
      * 数据请求成功
      *
