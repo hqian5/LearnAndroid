@@ -25,7 +25,7 @@ public class OtherActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Uri uri = Uri.parse("gbpassengericbcdigitalpay://");
-                if (!schemeValid(OtherActivity.this, uri)) {
+                if (schemeValid(OtherActivity.this, uri)) {
                     Intent intent = new Intent(Intent.ACTION_VIEW, uri);
                     startActivity(intent);
                 } else {
