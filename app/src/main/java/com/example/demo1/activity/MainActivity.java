@@ -8,7 +8,10 @@ import androidx.fragment.app.FragmentManager;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
+import android.view.KeyEvent;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -18,61 +21,58 @@ import android.widget.Toast;
 import com.example.demo1.R;
 import com.example.demo1.fragment.LeftMenuFragment;
 import com.example.demo1.fragment.RightMenuFragment;
+import com.example.demo1.view.MyButton;
 
 public class MainActivity extends AppCompatActivity {
 
+    private static final String TAG = "MainActivity";
     private Context mContext;
-    private DrawerLayout drawerLayout;
-    private LeftMenuFragment leftMenuFragment;
-    private RightMenuFragment rightMenuFragment;
-    private FragmentManager manager;
-    private Button btnOpen;
+    private MyButton btnMy;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.layout_two_drawers);
+        setContentView(R.layout.activity_main);
         mContext = MainActivity.this;
         initView();
     }
 
-    @SuppressLint("WrongConstant")
     private void initView() {
-        manager = getSupportFragmentManager();
-        drawerLayout = findViewById(R.id.dr_layout);
-        leftMenuFragment = (LeftMenuFragment) manager.findFragmentById(R.id.fg_left_menu);
-        rightMenuFragment = (RightMenuFragment) manager.findFragmentById(R.id.fg_right_menu);
-        leftMenuFragment.setDrawerLayout(drawerLayout);
-        rightMenuFragment.setDrawerLayout(drawerLayout);
-        drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED, Gravity.END);
-        drawerLayout.addDrawerListener(new DrawerLayout.DrawerListener() {
+        btnMy = findViewById(R.id.bt_my);
+        btnMy.setOnKeyListener(new View.OnKeyListener() {
             @Override
-            public void onDrawerSlide(@NonNull View drawerView, float slideOffset) {
-
-            }
-
-            @Override
-            public void onDrawerOpened(@NonNull View drawerView) {
-
-            }
-
-            @Override
-            public void onDrawerClosed(@NonNull View drawerView) {
-                drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED, Gravity.END);
-            }
-
-            @Override
-            public void onDrawerStateChanged(int newState) {
-
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                if (event.getAction() == KeyEvent.ACTION_DOWN) {
+                    Log.i(TAG, "MyButton监听器onKeyDown被调用");
+                }
+                return false;
             }
         });
-        btnOpen = findViewById(R.id.btn_open);
-        btnOpen.setOnClickListener(new View.OnClickListener() {
+        btnMy.setOnTouchListener(new View.OnTouchListener() {
             @Override
-            public void onClick(View v) {
-                drawerLayout.openDrawer(Gravity.END);
+            public boolean onTouch(View v, MotionEvent event) {
+                if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                    Log.i(TAG, "监听器的onTouchEvent被调用");
+                }
+                return false;
             }
         });
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        super.onKeyDown(keyCode, event);
+        Log.i(TAG, "activity中重写的onKeyDown被调用");
+        return false;
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        super.onTouchEvent(event);
+        if (event.getAction() == MotionEvent.ACTION_DOWN) {
+            Log.i(TAG, "MainActivity重写的onTouchEvent被调用");
+        }
+        return false;
     }
 
     private void setToast(String msg) {

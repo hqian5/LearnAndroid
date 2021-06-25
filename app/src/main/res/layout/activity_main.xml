@@ -4,83 +4,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.MainActivity"
     android:orientation="vertical">
 
-    <Button
-        android:id="@+id/btn_start"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="contextMenu"
-        android:layout_gravity="center_horizontal"
-        android:textAllCaps="false"
-        android:visibility="gone" />
-
-    <Button
-        android:id="@+id/btn_end"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="popupMenu"
-        android:layout_gravity="center_horizontal"
-        android:textAllCaps="false"
-        android:visibility="gone" />
-
-    <Button
-        android:id="@+id/btn_dialog3"
+    <com.example.demo1.view.MyButton
+        android:id="@+id/bt_my0"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="可以更新的ProgressDialog"
-        android:layout_gravity="center_horizontal"
-        android:textAllCaps="false"
-        android:visibility="gone" />
+        android:text="开始"
+        android:layout_gravity="center" />
 
-    <Button
-        android:id="@+id/btn_dialog4"
+    <com.example.demo1.view.MyButton
+        android:id="@+id/bt_my"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="日期选择Dialog"
-        android:layout_gravity="center_horizontal"
-        android:textAllCaps="false"
-        android:visibility="gone" />
-
-    <Button
-        android:id="@+id/btn_dialog_diy"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="时间选择Dialog"
-        android:layout_gravity="center_horizontal"
-        android:textAllCaps="false"
-        android:visibility="gone" />
-
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/iv_img"
-        android:layout_gravity="center_horizontal"
-        android:visibility="gone" />
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="30sp"
-        android:id="@+id/tv_main_title"
-        android:gravity="center" />
-
-    <androidx.viewpager.widget.ViewPager
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/vp">
-
-        <!--        <androidx.viewpager.widget.PagerTitleStrip-->
-        <!--            android:layout_width="match_parent"-->
-        <!--            android:layout_height="wrap_content"-->
-        <!--            android:id="@+id/pts_title" />-->
-
-        <androidx.viewpager.widget.PagerTabStrip
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/pts_tab" />
-
-    </androidx.viewpager.widget.ViewPager>
+        android:text="按钮"
+        android:layout_gravity="center" />
 
 </LinearLayout>
