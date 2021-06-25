@@ -1,4 +1,4 @@
-package com.example.demo1;
+package com.example.demo1.activity;
 
 import android.content.Context;
 import android.content.Intent;
@@ -12,6 +12,8 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.demo1.R;
 
 import java.util.List;
 

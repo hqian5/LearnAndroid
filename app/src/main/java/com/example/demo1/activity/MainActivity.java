@@ -1,4 +1,4 @@
-package com.example.demo1;
+package com.example.demo1.activity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -10,20 +10,14 @@ import android.content.Context;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.demo1.adpter.GeneralAdapter;
-import com.example.demo1.entity.App;
-import com.example.demo1.fragment.ContentFragment;
+import com.example.demo1.R;
 import com.example.demo1.fragment.LeftMenuFragment;
 import com.example.demo1.fragment.RightMenuFragment;
-
-import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
