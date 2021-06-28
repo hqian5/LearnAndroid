@@ -8,6 +8,8 @@ import androidx.fragment.app.FragmentManager;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.KeyEvent;
@@ -23,11 +25,26 @@ import com.example.demo1.fragment.LeftMenuFragment;
 import com.example.demo1.fragment.RightMenuFragment;
 import com.example.demo1.view.MyButton;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "MainActivity";
     private Context mContext;
-    private MyButton btnMy;
+    private Button btTest;
+    private String[] strArr = {"1", "2", "3", "4", "5", "6", "7", "8"};
+    private int count;
+
+    final Handler mHandler = new Handler() {
+        @Override
+        public void handleMessage(@NonNull Message msg) {
+            if (msg.what == 0x11) {
+                count++;
+                btTest.setText(strArr[count % 8]);
+            }
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,25 +55,17 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initView() {
-        btnMy = findViewById(R.id.bt_my);
-        btnMy.setOnKeyListener(new View.OnKeyListener() {
+        btTest = findViewById(R.id.bt_test);
+        sendMessage();
+    }
+
+    private void sendMessage() {
+        new Timer().schedule(new TimerTask() {
             @Override
-            public boolean onKey(View v, int keyCode, KeyEvent event) {
-                if (event.getAction() == KeyEvent.ACTION_DOWN) {
-                    Log.i(TAG, "MyButton监听器onKeyDown被调用");
-                }
-                return false;
+            public void run() {
+                mHandler.sendEmptyMessage(0x11);
             }
-        });
-        btnMy.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                if (event.getAction() == MotionEvent.ACTION_DOWN) {
-                    Log.i(TAG, "监听器的onTouchEvent被调用");
-                }
-                return false;
-            }
-        });
+        }, 0, 1000);
     }
 
     @Override

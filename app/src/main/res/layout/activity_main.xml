@@ -6,15 +6,15 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <com.example.demo1.view.MyButton
-        android:id="@+id/bt_my0"
+    <Button
+        android:id="@+id/bt_start"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="开始"
         android:layout_gravity="center" />
 
-    <com.example.demo1.view.MyButton
-        android:id="@+id/bt_my"
+    <Button
+        android:id="@+id/bt_test"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="按钮"
