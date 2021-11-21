@@ -1,3 +1,5 @@
+include ':activitylifecycle'
+include ':module-test'
 include ':module-mvp'
 include ':app'
 rootProject.name = "Demo1"
