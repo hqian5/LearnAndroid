@@ -12,7 +12,7 @@
         <activity
             android:name=".FirstActivity"
             android:label="First Activity"
-            android:launchMode="standard">
+            android:launchMode="singleTask">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -21,7 +21,7 @@
         <activity
             android:name=".SecondActivity"
             android:label="Second Activity"
-            android:launchMode="singleInstance">
+            android:launchMode="singleTask">
             <intent-filter>
                 <action android:name="ACTION_START" />
 
@@ -32,7 +32,7 @@
         <activity
             android:name=".ThirdActivity"
             android:label="Third Activity"
-            android:launchMode="standard">
+            android:launchMode="singleTask">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />

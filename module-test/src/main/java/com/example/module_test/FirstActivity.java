@@ -14,7 +14,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-public class FirstActivity extends AppCompatActivity {
+import static com.example.module_test.SecondActivity.startSecondActivity;
+
+public class FirstActivity extends BaseActivity {
     private static final String TAG = "FirstActivity";
 
     @Override
@@ -25,9 +27,7 @@ public class FirstActivity extends AppCompatActivity {
         button1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(FirstActivity.this, SecondActivity.class);
-                intent.putExtra("data", "first bt1");
-                startActivityForResult(intent, 1);
+                startSecondActivity(FirstActivity.this, "data1", 5);
             }
         });
         Button button2 = findViewById(R.id.btn2);
@@ -53,7 +53,7 @@ public class FirstActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         switch (requestCode) {
-            case 1:
+            case 5:
                 if (resultCode == RESULT_OK) {
                     Toast.makeText(this, "return data: " + data.getStringExtra("data_return"), Toast.LENGTH_SHORT).show();
                 }
