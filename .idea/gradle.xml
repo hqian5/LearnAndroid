@@ -16,6 +16,7 @@
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/module-mvp" />
             <option value="$PROJECT_DIR$/module-test" />
+            <option value="$PROJECT_DIR$/uiwidget" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

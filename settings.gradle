@@ -1,3 +1,4 @@
+include ':uiwidget'
 include ':activitylifecycle'
 include ':module-test'
 include ':module-mvp'
