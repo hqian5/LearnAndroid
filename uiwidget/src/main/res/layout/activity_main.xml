@@ -20,7 +20,7 @@
         android:id="@+id/bt_ui"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="换成昊昊"
+        android:text="Button"
         android:textAllCaps="false" />
 
     <EditText
@@ -35,6 +35,14 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:id="@+id/iv_ui"
-        android:src="@drawable/img_1" />
+        android:src="@drawable/img_1"
+        android:visibility="gone" />
+
+    <ProgressBar
+        android:id="@+id/pb_ui"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+        android:max="100" />
 
 </LinearLayout>

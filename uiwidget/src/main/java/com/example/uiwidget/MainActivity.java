@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
@@ -14,6 +15,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private EditText etUi;
     private ImageView ivUi;
+    private ProgressBar pbUi;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +28,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         findViewById(R.id.bt_ui).setOnClickListener(this);
         etUi = findViewById(R.id.et_ui);
         ivUi = findViewById(R.id.iv_ui);
+        pbUi = findViewById(R.id.pb_ui);
     }
 
     @SuppressLint("NonConstantResourceId")
@@ -33,7 +36,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.bt_ui:
-                ivUi.setImageResource(R.drawable.img_2);
+//                ivUi.setImageResource(R.drawable.img_2);
+                if (pbUi.getVisibility() == View.VISIBLE) {
+                    pbUi.setVisibility(View.GONE);
+                } else {
+                    pbUi.setProgress(pbUi.getProgress() + 10);
+                    pbUi.setVisibility(View.VISIBLE);
+                }
                 break;
             default:
                 break;
