@@ -1,3 +1,4 @@
+include ':ui-custom-views'
 include ':ui-layout'
 include ':uiwidget'
 include ':activitylifecycle'
