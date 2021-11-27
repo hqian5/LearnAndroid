@@ -1,3 +1,4 @@
+include ':module-listview'
 include ':ui-custom-views'
 include ':ui-layout'
 include ':uiwidget'
