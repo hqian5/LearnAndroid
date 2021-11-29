@@ -1,3 +1,4 @@
+include ':module-ui-practice'
 include ':module-recyclerview'
 include ':module-listview'
 include ':ui-custom-views'
