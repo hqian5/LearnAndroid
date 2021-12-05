@@ -1,3 +1,4 @@
+include ':module-fragment-practice'
 include ':module-fragment'
 include ':module-ui-practice'
 include ':module-recyclerview'
