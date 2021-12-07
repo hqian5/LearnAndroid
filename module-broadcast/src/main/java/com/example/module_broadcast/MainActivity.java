@@ -3,6 +3,7 @@ package com.example.module_broadcast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.BroadcastReceiver;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -10,6 +11,7 @@ import android.net.NetworkInfo;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.View;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
@@ -21,6 +23,28 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        findViewById(R.id.bt_send).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent("NormalBroadcast");//action可不填
+                intent.setComponent(new ComponentName("com.example.module_broadcast",
+                        "com.example.module_broadcast.NormalBroadcastReceiver"));
+                sendBroadcast(intent);
+            }
+        });
+        findViewById(R.id.bt_send_2).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent("NormalBroadcast");//action可不填
+                intent.setComponent(new ComponentName("com.example.module_broadcast2",
+                        "com.example.module_broadcast2.OrderedReceiver"));
+                sendBroadcast(intent);
+            }
+        });
+    }
+
+
+    private void initNetworkBroadCastReceiver() {
         intentFilter = new IntentFilter();
         intentFilter.addAction(CONNECTIVITY_SERVICE);
         intentFilter.addAction(WifiManager.NETWORK_STATE_CHANGED_ACTION);
