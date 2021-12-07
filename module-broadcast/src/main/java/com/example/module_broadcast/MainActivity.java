@@ -27,10 +27,9 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.bt_send).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent("BroadcastTest");//action可不填
-//                intent.setComponent(new ComponentName("com.example.module_broadcast",
-//                        "com.example.module_broadcast.NormalBroadcastReceiver"));
-                sendBroadcast(intent);
+                Intent intent = new Intent("BroadcastTest");
+                //发送有序广播
+                sendOrderedBroadcast(intent, null);
             }
         });
 //        findViewById(R.id.bt_send_2).setOnClickListener(new View.OnClickListener() {
@@ -47,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
     private void initNormalReceive() {
         intentFilter = new IntentFilter();
         intentFilter.addAction("BroadcastTest");
+        intentFilter.setPriority(100);
         normalBroadcastReceiver = new NormalBroadcastReceiver();
         registerReceiver(normalBroadcastReceiver, intentFilter);
     }

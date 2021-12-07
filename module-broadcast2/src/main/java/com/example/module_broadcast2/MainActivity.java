@@ -20,6 +20,7 @@ public class MainActivity extends AppCompatActivity {
     private void initOrderedReceiver() {
         intentFilter = new IntentFilter();
         intentFilter.addAction("BroadcastTest");
+        intentFilter.setPriority(110);//设置优先级
         orderedReceiver = new OrderedReceiver();
         registerReceiver(orderedReceiver, intentFilter);
     }

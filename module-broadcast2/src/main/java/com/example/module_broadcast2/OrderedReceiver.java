@@ -10,5 +10,6 @@ public class OrderedReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         Toast.makeText(context, "received test broadcast from module-broadcast", Toast.LENGTH_SHORT).show();
+        abortBroadcast();
     }
 }
