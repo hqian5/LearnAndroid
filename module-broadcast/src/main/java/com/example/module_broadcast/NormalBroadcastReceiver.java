@@ -9,6 +9,6 @@ public class NormalBroadcastReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        Toast.makeText(context, "received normal broadcast", Toast.LENGTH_SHORT).show();
+        Toast.makeText(context, "received test broadcast", Toast.LENGTH_SHORT).show();
     }
 }

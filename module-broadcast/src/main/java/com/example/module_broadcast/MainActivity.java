@@ -3,7 +3,6 @@ package com.example.module_broadcast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.BroadcastReceiver;
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -17,46 +16,54 @@ import android.widget.Toast;
 public class MainActivity extends AppCompatActivity {
 
     private IntentFilter intentFilter;
-    private NetworkChangeReceiver receiver;
+    private NetworkChangeReceiver networkChangeReceiver;
+    private NormalBroadcastReceiver normalBroadcastReceiver;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        initNormalReceive();
         findViewById(R.id.bt_send).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent("NormalBroadcast");//action可不填
-                intent.setComponent(new ComponentName("com.example.module_broadcast",
-                        "com.example.module_broadcast.NormalBroadcastReceiver"));
+                Intent intent = new Intent("BroadcastTest");//action可不填
+//                intent.setComponent(new ComponentName("com.example.module_broadcast",
+//                        "com.example.module_broadcast.NormalBroadcastReceiver"));
                 sendBroadcast(intent);
             }
         });
-        findViewById(R.id.bt_send_2).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent("NormalBroadcast");//action可不填
-                intent.setComponent(new ComponentName("com.example.module_broadcast2",
-                        "com.example.module_broadcast2.OrderedReceiver"));
-                sendBroadcast(intent);
-            }
-        });
+//        findViewById(R.id.bt_send_2).setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent("NormalBroadcast");//action可不填
+//                intent.setComponent(new ComponentName("com.example.module_broadcast2",
+//                        "com.example.module_broadcast2.OrderedReceiver"));
+//                sendBroadcast(intent);
+//            }
+//        });
     }
 
+    private void initNormalReceive() {
+        intentFilter = new IntentFilter();
+        intentFilter.addAction("BroadcastTest");
+        normalBroadcastReceiver = new NormalBroadcastReceiver();
+        registerReceiver(normalBroadcastReceiver, intentFilter);
+    }
 
     private void initNetworkBroadCastReceiver() {
         intentFilter = new IntentFilter();
         intentFilter.addAction(CONNECTIVITY_SERVICE);
         intentFilter.addAction(WifiManager.NETWORK_STATE_CHANGED_ACTION);
         intentFilter.addAction(WifiManager.WIFI_STATE_CHANGED_ACTION);
-        receiver = new NetworkChangeReceiver();
-        registerReceiver(receiver, intentFilter);
+        networkChangeReceiver = new NetworkChangeReceiver();
+        registerReceiver(networkChangeReceiver, intentFilter);
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        unregisterReceiver(receiver);
+        unregisterReceiver(normalBroadcastReceiver);
     }
 
     class NetworkChangeReceiver extends BroadcastReceiver {

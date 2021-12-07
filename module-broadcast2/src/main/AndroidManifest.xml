@@ -9,14 +9,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Demo1">
-        <receiver
-            android:name=".OrderedReceiver"
-            android:enabled="true"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="NormalBroadcast" />
-            </intent-filter>
-        </receiver>
 
         <activity android:name=".MainActivity">
             <intent-filter>
