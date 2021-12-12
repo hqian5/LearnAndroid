@@ -1,3 +1,4 @@
+include ':module-broadcast-practice'
 include ':module-broadcast2'
 include ':module-broadcast'
 include ':module-fragment-practice'
