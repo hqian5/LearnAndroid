@@ -1,6 +1,7 @@
 package com.example.module_broadcast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -18,18 +19,20 @@ public class MainActivity extends AppCompatActivity {
     private IntentFilter intentFilter;
     private NetworkChangeReceiver networkChangeReceiver;
     private NormalBroadcastReceiver normalBroadcastReceiver;
+    private LocalBroadcastManager localBroadcastManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        localBroadcastManager = LocalBroadcastManager.getInstance(this);
         initNormalReceive();
         findViewById(R.id.bt_send).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent("BroadcastTest");
-                //发送有序广播
-                sendOrderedBroadcast(intent, null);
+                //发送广播
+                localBroadcastManager.sendBroadcast(intent);
             }
         });
 //        findViewById(R.id.bt_send_2).setOnClickListener(new View.OnClickListener() {
@@ -48,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
         intentFilter.addAction("BroadcastTest");
         intentFilter.setPriority(100);
         normalBroadcastReceiver = new NormalBroadcastReceiver();
-        registerReceiver(normalBroadcastReceiver, intentFilter);
+        localBroadcastManager.registerReceiver(normalBroadcastReceiver, intentFilter);
     }
 
     private void initNetworkBroadCastReceiver() {
@@ -63,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        unregisterReceiver(normalBroadcastReceiver);
+        localBroadcastManager.unregisterReceiver(normalBroadcastReceiver);
     }
 
     class NetworkChangeReceiver extends BroadcastReceiver {
